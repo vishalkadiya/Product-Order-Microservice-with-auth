@@ -22,7 +22,6 @@ import java.math.BigDecimal;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-@Testcontainers
 @AutoConfigureMockMvc
 class ProductServiceApplicationTests {
 
@@ -34,6 +33,10 @@ class ProductServiceApplicationTests {
     private ObjectMapper objectMapper;
     @Autowired
     private ProductRepository productRepository;
+
+    static {
+        mongoDBContainer.start();
+    }
 
     @DynamicPropertySource
     static void setProperties(DynamicPropertyRegistry dymDynamicPropertyRegistry) {
