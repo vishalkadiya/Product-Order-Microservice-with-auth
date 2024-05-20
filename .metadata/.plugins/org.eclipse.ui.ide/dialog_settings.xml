@@ -38,6 +38,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\NTS-Vishal Kadiya\Downloads\Product-Order-Microservice-with-auth-fifth-circuitbreaker\Product-Order-Microservice-with-auth-fifth-circuitbreaker"/>
 			<item value="C:\Users\NTS-Vishal Kadiya\Downloads\Ecommerce Backend"/>
 		</list>
 	</section>

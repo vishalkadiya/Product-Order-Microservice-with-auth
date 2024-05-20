@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\Users\NTS-Vishal Kadiya\Downloads\Product-Order-Microservice-with-auth-fifth-circuitbreaker\Product-Order-Microservice-with-auth-fifth-circuitbreaker"/>
 			<item value="C:\Users\NTS-Vishal Kadiya\Downloads\Ecommerce Backend"/>
 		</list>
 		<list key="projectNameTemplate">
