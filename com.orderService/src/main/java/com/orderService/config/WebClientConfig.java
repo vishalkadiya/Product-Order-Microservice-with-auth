@@ -1,4 +1,4 @@
-package com.inventoryService.config;
+package com.orderService.config;
 
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -11,7 +11,7 @@ public class WebClientConfig {
 
     @Bean
     @LoadBalanced
-    public WebClient webClient(){
-        return WebClient.builder().build();
+    public WebClient.Builder webClientBuilder() {
+        return WebClient.builder();
     }
 }

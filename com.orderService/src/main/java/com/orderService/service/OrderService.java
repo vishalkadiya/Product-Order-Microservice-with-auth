@@ -1,8 +1,10 @@
 package com.orderService.service;
 
 import com.orderService.dto.InventoryResponse;
+import com.orderService.dto.OrderLineItemsDto;
 import com.orderService.dto.OrderRequest;
 import com.orderService.model.Order;
+import com.orderService.model.OrderLineItems;
 import com.orderService.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,11 +20,12 @@ import java.util.UUID;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final WebClient webClient;
+    private final WebClient.Builder webClientBuilder;
 
     public void placeOrder(OrderRequest orderRequest) {
         Order order = new Order();
         order.setOrderNumber(UUID.randomUUID().toString());
+
         List<OrderLineItems> orderLineItems = orderRequest.getOrderLineItemsDtoList()
                 .stream()
                 .map(this::mapToDto)
@@ -36,7 +39,7 @@ public class OrderService {
 
         // Call Inventory Service, and place order if product is in
         // stock
-        InventoryResponse[] inventoryResponsArray = webClient.get()
+        InventoryResponse[] inventoryResponsArray = webClientBuilder.build().get()
                 .uri("http://inventory-service/api/inventory",
                         uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
                 .retrieve()
@@ -53,12 +56,11 @@ public class OrderService {
         }
     }
 
-    private static Order mapToOrder(OrderRequest orderRequest) {
-        Order order = new Order();
-        order.setOrderNumber(UUID.randomUUID().toString());
-        order.setPrice(orderRequest.price());
-        order.setQuantity(orderRequest.quantity());
-        order.setSkuCode(orderRequest.skuCode());
-        return order;
+    private OrderLineItems mapToDto(OrderLineItemsDto orderLineItemsDto) {
+        OrderLineItems orderLineItems = new OrderLineItems();
+        orderLineItems.setPrice(orderLineItemsDto.getPrice());
+        orderLineItems.setQuantity(orderLineItemsDto.getQuantity());
+        orderLineItems.setSkuCode(orderLineItemsDto.getSkuCode());
+        return orderLineItems;
     }
 }
